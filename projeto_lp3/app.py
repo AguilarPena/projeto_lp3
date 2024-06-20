@@ -27,7 +27,7 @@ def produtos():
     lista_produtos = [
         {"nome": "Coca-Cola", "descricao": "Mata a sede"},
         {"nome": "Doritos", "descricao": "Suja a mão"},
-        {"nome": "Chocolate", "descricao": "Bom"}
+        {"nome": "Chocolate", "descricao": "É bom"}
     ]
     return render_template("produtos.html", produtos=lista_produtos)
 
@@ -51,13 +51,28 @@ def cnpj():
 
 '''''
 
-@app.route("/gerar-cpf")
+@app.route("/cpf")
 def gcpf():
-    return cpf.generate(True)
-# /produtos - página de produtos
-@app.route("/gerar-cnpj")
+    vcpf = cpf.generate(True)
+    return render_template("cpf.html", cpf = vcpf)
+
+
+@app.route("/cnpj")
 def gcnpj():
-    return cnpj.generate(True)
+    vcnpj = cnpj.generate(True)
+    return render_template("cnpj.html", cnpj = vcnpj)
+
+@app.route("/termos")
+def termos():
+    return render_template("termos.html")
+
+@app.route("/politica")
+def politica():
+    return render_template("politica.html")
+
+@app.route("/uso")
+def uso():
+    return render_template("uso.html")
 
 app.run()
 
