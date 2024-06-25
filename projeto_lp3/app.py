@@ -1,6 +1,12 @@
 #importa a class Flask do módulo flask
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from validate_docbr import CPF, CNPJ
+
+lista_produtos = [
+        {"nome": "Coca-Cola", "descricao": "Mata a sede", "imagem": "https://www.piramidesdistribuidora.com.br/images/products/3709-coca-cola-zero-lata-350ml-12un.20240613133557.png"},
+        {"nome": "Doritos", "descricao": "Suja a mão", "imagem": "https://images-americanas.b2w.io/produtos/01/00/img/2638457/4/2638457405_1GG.jpg"},
+        {"nome": "Chocolate", "descricao": "É bom", "imagem": "https://img.sitemercado.com.br/produtos/4dbe50451cec9ef0765045abfd6342082b399c04f0ee7ec680080f573e2e5b6c_full.jpg"}
+    ]
 
 #instancia um objeto flask que representa a aplicação
 app = Flask("Minha App") # nome da minha aplicação/projeto - pode ser qualquer coisa
@@ -24,11 +30,7 @@ def xxxxx():
 # /produtos - página de produtos
 @app.route("/produtos")
 def produtos():
-    lista_produtos = [
-        {"nome": "Coca-Cola", "descricao": "Mata a sede", "imagem": "https://www.piramidesdistribuidora.com.br/images/products/3709-coca-cola-zero-lata-350ml-12un.20240613133557.png"},
-        {"nome": "Doritos", "descricao": "Suja a mão", "imagem": "https://images-americanas.b2w.io/produtos/01/00/img/2638457/4/2638457405_1GG.jpg"},
-        {"nome": "Chocolate", "descricao": "É bom", "imagem": "https://img.sitemercado.com.br/produtos/4dbe50451cec9ef0765045abfd6342082b399c04f0ee7ec680080f573e2e5b6c_full.jpg"}
-    ]
+    
     return render_template("produtos.html", produtos=lista_produtos)
 
 # /servicos - retomar "Nossos serviços"
@@ -73,6 +75,26 @@ def politica():
 @app.route("/uso")
 def uso():
     return render_template("uso.html")
+
+#GET /produtos/cadastro (rota que devolve o form)
+@app.route("/produtos/cadastro")
+def cadastro_produto():
+    return render_template("cadastro_produto.html")
+
+#POST /produtos (produtos que vai lidar com os dados envidos pelo form)
+#enviados pelo form
+#acessar o objeto request (importar)
+
+@app.route("/produtos", methods=['POST'])
+def salvar_produto():
+    
+    nome = request.form["nome"]
+    descricao = request.form["descricao"]
+    
+    produto = {"nome": nome, "descricao": descricao, "imagem": ""}
+    lista_produtos.append(produto)
+
+    return render_template("produtos.html", produtos=lista_produtos)
 
 app.run()
 
