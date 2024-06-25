@@ -9,6 +9,8 @@
     {% for produto in produtos %}
         <h2>{{ produto.nome }}</h2>
         <p>{{ produto.descricao }}</p> 
+
+        <img src="{{produto.imagem}}" alt="" height="500px">
     {% endfor %}
 
 {% endblock %}

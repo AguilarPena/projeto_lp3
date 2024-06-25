@@ -25,9 +25,9 @@ def xxxxx():
 @app.route("/produtos")
 def produtos():
     lista_produtos = [
-        {"nome": "Coca-Cola", "descricao": "Mata a sede"},
-        {"nome": "Doritos", "descricao": "Suja a mão"},
-        {"nome": "Chocolate", "descricao": "É bom"}
+        {"nome": "Coca-Cola", "descricao": "Mata a sede", "imagem": "https://www.piramidesdistribuidora.com.br/images/products/3709-coca-cola-zero-lata-350ml-12un.20240613133557.png"},
+        {"nome": "Doritos", "descricao": "Suja a mão", "imagem": "https://images-americanas.b2w.io/produtos/01/00/img/2638457/4/2638457405_1GG.jpg"},
+        {"nome": "Chocolate", "descricao": "É bom", "imagem": "https://img.sitemercado.com.br/produtos/4dbe50451cec9ef0765045abfd6342082b399c04f0ee7ec680080f573e2e5b6c_full.jpg"}
     ]
     return render_template("produtos.html", produtos=lista_produtos)
 
